@@ -43,7 +43,8 @@ spec:
           ui:field: RepoUrlPicker
           ui:options:
             allowedHosts:
-              - github.com
+              # - github.com
+              - dev.azure.com
   steps:
     - id: template
       name: Fetch Skeleton + Template
@@ -51,7 +52,8 @@ spec:
       input:
         url: ./skeleton
         copyWithoutRender:
-          - .github/workflows/*
+          # - .github/workflows/*
+           - .azure/workflows/*
         values:
           component_id: ${{ parameters.component_id }}
           description: ${{ parameters.description }}
@@ -60,10 +62,12 @@ spec:
 
     - id: publish
       name: Publish
-      action: publish:github
+      # action: publish:github
+       action: publish:azure
       input:
         allowedHosts:
-          - github.com
+          # - github.com
+          - dev.azure.com
         description: This is ${{ parameters.component_id }}
         repoUrl: ${{ parameters.repoUrl }}
 
